@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo das Notícias: Verdadeiro ou Falso?</title>
+    <style>
+        /* --- ESTILIZAÇÃO GERAL --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        /* --- ESTRUTURA DOS CARTÕES (FLIP CARD) --- */
+        .card {
+            background-color: transparent;
+            width: 300px;
+            height: 350px;
+            perspective: 1000px; /* Efeito 3D de profundidade */
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Classe que o JavaScript vai ativar/desativar */
+        .card.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Suporte para navegadores antigos */
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- DESIGN DA FRENTE --- */
+        .card-front {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+        }
+
+        .card-front h2 {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .hint {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- DESIGN DO VERSO --- */
+        .card-back {
+            background-color: white;
+            color: #333;
+            transform: rotateY(180deg);
+            border: 2px solid #ddd;
+        }
+
+        /* Estilos dinâmicos para o resultado */
+        .status {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .verdadeiro {
+            color: #2ecc71;
+        }
+
+        .falso {
+            color: #e74c3c;
+        }
+
+        .card-back p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #555;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fato ou Fake? Clique nos cartões para descobrir!</h1>
+
+    <div class="container">
+
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2>Cientistas criam vidro interativo que muda de cor sozinho de acordo com o seu humor</h2>
+                    <span class="hint">Clique para revelar</span>
+                </div>
+                <div class="card-back">
+                    <span class="status falso">❌ FALSO</span>
+                    <p>Embora existam vidros inteligentes que mudam de opacidade com correntes elétricas ou calor (vidro eletrocrômico), não existe tecnologia capaz de ler as emoções humanas ou o "humor" para alterar a cor do material de forma autônoma.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2>O mel de abelha puro é o único alimento que não estraga e pode durar milhares de anos</h2>
+                    <span class="hint">Clique para revelar</span>
+                </div>
+                <div class="card-back">
+                    <span class="status verdadeiro">✅ VERDADEIRO</span>
+                    <p>Por ter pouquíssima água e alta acidez, o mel é um ambiente extremamente hostil para bactérias e microrganismos. Arqueólogos já encontraram potes de mel com mais de 3 mil anos em tumba egípcia que ainda estavam perfeitamente comestíveis.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front">
+                    <h2>Nova espécie de tubarão voador é descoberta na costa da Austrália</h2>
+                    <span class="hint">Clique para revelar</span>
+                </div>
+                <div class="card-back">
+                    <span class="status falso">❌ FALSO</span>
+                    <p>Esta notícia foi uma brincadeira de Primeiro de Abril que viralizou na internet. Alguns tubarões conseguem saltar muito alto para fora da água durante a caça (como o Tubarão-Branco), mas nenhum possui asas ou capacidade de voar.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function flipCard(card) {
+            // Alterna a classe 'is-flipped' no cartão clicado
+            card.classList.toggle('is-flipped');
+        }
+    </script>
+
+</body>
+</html>

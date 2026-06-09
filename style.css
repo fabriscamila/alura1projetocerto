@@ -1,0 +1,135 @@
+/* ==========================================
+   1. CONFIGURAÇÕES GERAIS E LAYOUT
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* ==========================================
+   2. ESTRUTURA DO CARD E EFEITO 3D
+   ========================================== */
+.card {
+    background-color: transparent;
+    width: 320px;
+    height: 380px;
+    perspective: 1000px; /* Ativa o ambiente 3D */
+    cursor: pointer;
+}
+
+/* Pequeno efeito de elevação ao passar o mouse antes do clique */
+.card:hover .card-inner {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais suave */
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Gatilho do giro (ativado via JS) */
+.card.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, 
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Suporte Safari */
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+/* ==========================================
+   3. DESIGN DAS FACES (FRENTE E VERSO)
+   ========================================== */
+/* Face Frontal */
+.card-front {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #ffffff;
+}
+
+.card-front h2 {
+    font-size: 1.35rem;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.hint {
+    position: absolute;
+    bottom: 24px;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Face Traseira */
+.card-back {
+    background-color: #ffffff;
+    color: #333333;
+    transform: rotateY(180deg);
+    border: 1px solid #e1e8ed;
+}
+
+.status {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+}
+
+.verdadeiro {
+    color: #2ed573;
+}
+
+.falso {
+    color: #ff4757;
+}
+
+.card-back p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #57606f;
+}
